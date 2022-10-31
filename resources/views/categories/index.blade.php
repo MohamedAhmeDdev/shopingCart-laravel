@@ -40,14 +40,18 @@
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($categories as $category)
+                  @foreach($categories as $id=>$category)
                   <tr>
-                    <td>{{$category->id}}</td>
+                    <td>{{$id+1}}</td>
                     <td>{{$category->category_name}}
                     </td>
                     <td>
                       <a href="{{route('categories.edit', $category->id)}}" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
-                      <a href="#" id="delete" class="btn btn-danger" ><i class="nav-icon fas fa-trash"></i></a>
+                      <form action="{{route('categories.destroy', $category->id)}}" method="post" style="display: inline-block">
+                        @csrf
+                        @method('DELETE')
+                       <button type="submit" id="delete" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></button>
+                      </form>
                     </td>
                   </tr>
 

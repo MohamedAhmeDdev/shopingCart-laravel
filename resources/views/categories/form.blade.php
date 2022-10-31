@@ -7,5 +7,5 @@
   <!-- /.card-body -->
   <div class="card-footer">
     <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-    <input type="submit" class="btn btn-primary" value="{{ $category->exists ? 'Update' : 'Save' }}" >
+    <input type="submit" class="btn btn-primary" value="{{ $category->exists ? 'Update' : 'Save' }}" > {{-- this check if the button type save or update --}}
   </div>
