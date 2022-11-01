@@ -43,8 +43,7 @@
                   @foreach($categories as $id=>$category)
                   <tr>
                     <td>{{$id+1}}</td>
-                    <td>{{$category->category_name}}
-                    </td>
+                    <td>{{$category->category_name}}</td>
                     <td>
                       <a href="{{route('categories.edit', $category->id)}}" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
                       <form action="{{route('categories.destroy', $category->id)}}" method="post" style="display: inline-block">
