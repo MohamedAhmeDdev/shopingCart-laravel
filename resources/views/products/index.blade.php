@@ -40,49 +40,46 @@
                     <th>Product Name</th>
                     <th>Product Category</th>
                     <th>Product Price</th>
+                    <th>Product Description</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
                   <tbody>
+                    @foreach ($products as $id=>$product)         
                   <tr>
-                    <td>1</td>
+                    <td>{{$id+1}}</td>
                     <td>
-                        <img src="backend/dist/img/user2-160x160.jpg" style="height : 50px; width : 50px" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('storage/products/' . $product->product_image) }}" style="height : 50px; width : 50px" class="img-circle elevation-2" alt="User Image">
                     </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>5</td>
+                    <td>{{$product->product_name}}</td>
+                    <td>{{$product->category->category_name}}</td>
+                    <td>{{$product->product_price}}</td>
+                    <td>{{$product->product_description}}</td>
                     <td>
-                      <a href="#" class="btn btn-success">Unactivate</a>
-                      <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
-                      <a href="#" id="delete" class="btn btn-danger" ><i class="nav-icon fas fa-trash"></i></a>
+                      @if($product->status === 1)
+                      <form action="{{route('products.deactivate', $product->id)}}" method="post" style="display: inline-block">
+                        @csrf
+                        @method('put')
+                      <button href="#" class="btn btn-success">Unactivate</button>
+                    </form>
+                      @else
+                      <form action="{{route('products.activate', $product->id)}}" method="post" style="display: inline-block">
+                        @csrf
+                        @method('put')
+                      <button href="#" class="btn btn-Warning">A ctivate</button>
+                    </form>
+                      @endif
+
+                      <a href="{{route('products.edit', $product->id)}}" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
+                      <form action="{{route('products.destroy', $product->id)}}" method="post" style="display: inline-block">
+                        @csrf
+                        @method('DELETE')
+                       <button type="submit" id="delete" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></button>
+                      </form>
                     </td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>
-                      <img src="backend/dist/img/user2-160x160.jpg" style="height : 50px; width : 50px" class="img-circle elevation-2" alt="User Image">
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>
-                      <a href="#" class="btn btn-warning">Activate</a>
-                      <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
-                      <a href="#" id="delete" class="btn btn-danger" ><i class="nav-icon fas fa-trash"></i></a>
-                    </td>
-                  </tr>
+                  @endforeach
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Num.</th>
-                    <th>Picture</th>
-                    <th>Product Name</th>
-                    <th>Product Category</th>
-                    <th>Product Price</th>
-                    <th>Actions</th>
-                  </tr>
-                  </tfoot>
                 </table>
               </div>
               <!-- /.card-body -->

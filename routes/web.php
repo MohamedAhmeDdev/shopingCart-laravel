@@ -53,6 +53,9 @@ Route::resources( [
 ]);
 
 
+Route::put('/products/{id}/activate', [ProductController::class, 'activate'])->name('products.activate');
+Route::put('/products/{id}/deactivate', [ProductController::class, 'deactivate'])->name('products.deactivate');
+
 
 
 

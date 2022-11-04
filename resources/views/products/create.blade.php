@@ -36,7 +36,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="{{route('products.store')}}" method="POST" enctype="multiple/formdata">
+              <form id="quickForm" action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('products.form')
               </form>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Product;
 
 use Illuminate\Http\Request;
 
@@ -13,8 +14,13 @@ class clientController extends Controller
 
     public function shop()
     {
-        return view('client.shop');
+        $products = Product::where('status', 1)
+        ->orderBy('product_name')
+        ->take(10)
+        ->get();
+        return view('client.shop', compact("products"));
     }
+
     public function cart()
     {
         return view('client.cart');

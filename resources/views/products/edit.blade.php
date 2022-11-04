@@ -36,10 +36,10 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="{{route('categories.edit',$product->id)}}" method="POST">
+              <form id="quickForm" action="{{route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                @include('product.form')
+                @include('products.form')
               </form>
             </div>
             <!-- /.card -->

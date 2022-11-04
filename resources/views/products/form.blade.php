@@ -24,7 +24,7 @@
     <label for="exampleInputFile">Product image</label>
     <div class="input-group">
       <div class="custom-file">
-        <input type="file" class="custom-file-input" id="exampleInputFile" name="product_image" value="{{ old('product_image', $product->product_image) }}">
+        <input type="file" class="custom-file-input" id="exampleInputFile" name="file" value="{{ old('product_image', $product->product_image) }}">
         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
       </div>
       <div class="input-group-append">
