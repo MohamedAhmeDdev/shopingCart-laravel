@@ -37,6 +37,8 @@ Route::get('/', [clientController::class, 'index']);
 Route::get('/shop', [clientController::class, 'shop']);
 Route::get('/cart', [clientController::class, 'cart']);
 Route::get('/checkout', [clientController::class, 'checkout']);
+Route::get('/checkout', [clientController::class, 'checkout']);
+Route::get('/addtocart/{id}', [clientController::class, 'addtocart'])->name('addtocart');
 
 //client controllers end 
 

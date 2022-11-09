@@ -64,17 +64,16 @@ class ProductController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Product $product)
     {
         $categories  = Category::all();
-        $product = Product::findOrFail($id);
+        // $product = Product::findOrFail($id);
         return view("products.edit", compact('product', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-// dd($request->all());
-        $product = Product::findOrFail($id);
+        // $product = Product::findOrFail($id);
         // Validate the inputs
         $request->validate([
             'product_name' => 'required',
@@ -87,7 +86,6 @@ class ProductController extends Controller
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png'
             ]);
-
             $request->file->store('products', 'public');
 
             $product->product_name = $request->product_name;
@@ -98,8 +96,6 @@ class ProductController extends Controller
 
             $product->update();
             return redirect()->route('products.index');
-        }else {
-            dd('False');
         }
     }
 
@@ -121,9 +117,9 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
+        // $product = Product::find($id);
         $product->delete();
         return redirect()->route('products.index');
     }
