@@ -38,7 +38,7 @@
 								@if (Session::has('cart'))
 								@foreach($products as $product)
 						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+						        <td class="product-remove"><a href="{{route('remove_item_form_cart', $product['product_id'])}}"><span class="ion-ios-close"></span></a></td>
 						        
 						        <td class="image-prod"><div class="img" style="background-image:url(storage/products/{{$product['product_image']}});"></div></td>
 						         
@@ -48,17 +48,18 @@
 						        </td>
 						        
 								<td class="price">${{$product['product_price']}}</td>
-								<form action="">
+								<form action="{{route('quantity.update', $product['product_id'])}}" method="post">
+									@csrf
 									<td class="quantity">
 										<div class="input-group mb-3">
 										<input type="number" name="quantity" class="quantity form-control input-number" value="{{$product['qty']}}" min="1" max="100">
-									</div>
+									   </div>
+									   <input type="submit" class="btn btn-success" value="Update">
+								   </td>
 								</form>
 						        
-									
-					          </td>
 						        
-						        <td class="total">$15.70</td>
+						        <td class="total">${{$product['qty'] * $product['product_price']}}</td>
 						      </tr>
 							  @endforeach
 							  @else
