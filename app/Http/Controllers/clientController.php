@@ -9,6 +9,7 @@ use Session;
 use DB;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class clientController extends Controller
 {
@@ -78,10 +79,10 @@ class clientController extends Controller
 
     public function checkout()
     {
-        // if(!Session::has('client')){
-        //     return view('auth.login');
-        // }
-        return view('client.checkout');
+        if(Auth::check()){
+            return view('client.checkout');
+        }
+        return view('auth.login');
     }
 
 
@@ -97,6 +98,6 @@ class clientController extends Controller
         $order->save();
 
         Session::forget('cart');
-          return view('client.home');
+          return redirect('/');
     }
 }

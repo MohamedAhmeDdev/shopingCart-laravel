@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\orderController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -44,7 +45,6 @@ Route::get('/checkout', [clientController::class, 'checkout'])->name('checkout')
 Route::get('/addtocart/{id}', [clientController::class, 'addtocart'])->name('addtocart');
 Route::post('/update_quantity/{id}', [clientController::class, 'update_quantity'])->name('quantity.update');
 Route::get('/removeItem/{id}', [clientController::class, 'removeItem'])->name('remove_item_form_cart');
-
 Route::post('/customerOrder', [clientController::class, 'store'])->name('customer_order');
 
 //client controllers end 

@@ -129,7 +129,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/tables/orders.html" class="nav-link">
+              <a href="{{route('order.index')}}" class="nav-link">
                 <i class="far fa-file nav-icon"></i>
                 <p>Orders</p>
               </a>

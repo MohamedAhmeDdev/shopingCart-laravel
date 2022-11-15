@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Cart;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,7 +15,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        $orders->transform(function($order, $key){
+            $order->cart = unserialize($order-> cart);
+            return $order;
+        });
+        return view('orders.index', compact('orders'));
     }
 
     /**
