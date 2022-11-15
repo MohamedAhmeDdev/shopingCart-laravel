@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'phone_no' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -42,6 +43,8 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone_no' => $request->phone_no,
+            'user_type' => "user",
             'password' => Hash::make($request->password),
         ]);
 
@@ -51,4 +54,21 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+
+    public function profile()
+    {
+        return view("user_pages.profile");
+    }
+
+    public function orderList()
+    {
+        return view("user_pages.order");
+    }
+
+    public function invoice()
+    {
+        return view("user_pages.invoice");
+    }
+
 }

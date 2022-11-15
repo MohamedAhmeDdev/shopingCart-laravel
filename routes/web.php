@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 
 /*
@@ -23,12 +24,15 @@ use App\Http\Controllers\ProductController;
 //     return view('welcome');
 // });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
 
+Route::get('/profile', [RegisteredUserController::class, 'profile']);
+Route::get('/orderList', [RegisteredUserController::class, 'orderList']);
+Route::get('/invoice', [RegisteredUserController::class, 'invoice']);
 
 
 
@@ -36,8 +40,7 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [clientController::class, 'index']);
 Route::get('/shop', [clientController::class, 'shop']);
 Route::get('/cart', [clientController::class, 'cart']);
-Route::get('/checkout', [clientController::class, 'checkout']);
-Route::get('/checkout', [clientController::class, 'checkout']);
+Route::get('/checkout', [clientController::class, 'checkout'])->name('checkout');
 Route::get('/addtocart/{id}', [clientController::class, 'addtocart'])->name('addtocart');
 Route::post('/update_quantity/{id}', [clientController::class, 'update_quantity'])->name('quantity.update');
 Route::get('/removeItem/{id}', [clientController::class, 'removeItem'])->name('remove_item_form_cart');
