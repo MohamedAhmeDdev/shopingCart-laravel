@@ -45,6 +45,8 @@ Route::get('/addtocart/{id}', [clientController::class, 'addtocart'])->name('add
 Route::post('/update_quantity/{id}', [clientController::class, 'update_quantity'])->name('quantity.update');
 Route::get('/removeItem/{id}', [clientController::class, 'removeItem'])->name('remove_item_form_cart');
 
+Route::post('/customerOrder', [clientController::class, 'store'])->name('customer_order');
+
 //client controllers end 
 
 

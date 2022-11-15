@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Cart;
+use App\Models\Order;
 use Session;
 use DB;
+use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
 
 class clientController extends Controller
@@ -41,43 +43,60 @@ class clientController extends Controller
 
     public function cart()
     {
-        if(!Session::has('cart')){
+        if (!Session::has('cart')) {
             return view('client.cart');
         }
-        $oldCart = Session::has('cart')? Session::get('cart'):null;
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         return view('client.cart', ['products' => $cart->items]);;
     }
 
-    public function update_quantity(Request $request, $id){
-           $oldCart = Session::has('cart')? Session::get('cart'):null;
-           $cart = new Cart($oldCart);
-           $cart->updateQty($id, $request->quantity);
-           Session::put('cart', $cart);
-           return back();
+    public function update_quantity(Request $request, $id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->updateQty($id, $request->quantity);
+        Session::put('cart', $cart);
+        return back();
     }
 
-    public function removeItem($product_id){
-        $oldCart = Session::has('cart')? Session::get('cart'):null;
+    public function removeItem($product_id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->removeItem($product_id);
-       
-        if(count($cart->items) > 0){
+
+        if (count($cart->items) > 0) {
             Session::put('cart', $cart);
-        }
-        else{
+        } else {
             Session::forget('cart');
         }
         return back();
     }
 
 
-    
+
     public function checkout()
     {
-        if(!Session::has('client')){
-            return view('auth.login');
-        }
+        // if(!Session::has('client')){
+        //     return view('auth.login');
+        // }
         return view('client.checkout');
+    }
+
+
+    public function store(Request $request)
+    {
+        $oldCart = Session::has('cart')? Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+
+        $order = new Order();
+        $order->name = $request->name;
+        $order->address = $request->address;
+        $order->cart = serialize($cart);
+        $order->save();
+
+        Session::forget('cart');
+          return view('client.home');
     }
 }
