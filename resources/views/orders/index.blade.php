@@ -66,7 +66,7 @@
                       @endforeach
                   </td>               
                     <td>
-                      <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></a>
+                      <a href="{{route('view.orders', $order->id)}}" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></a>
                     </td>
                   </tr>
                   @endforeach

@@ -8,7 +8,7 @@ use App\Http\Controllers\SlideController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +52,7 @@ Route::post('/customerOrder', [clientController::class, 'store'])->name('custome
 
 //admin controllers start
 Route::get('/admin', [AdminController::class, 'admin']);
+Route::get('/vieworders/{id}', [PdfController::class, 'view_pdf']) ->name('view.orders');
 //admin controllers end 
 
 Route::resources( [
